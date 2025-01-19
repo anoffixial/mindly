@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Admin Dashboard</h2>
+
+    <!-- Form to add a new question -->
+    <form method="POST">
+        <div class="form-group">
+            <label for="question">New Question:</label>
+            <input type="text" name="question" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <input type="text" name="category" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Question</button>
+    </form>
+
+    <br><br>
+
+    <!-- Display existing questions -->
+    <h3>Existing Questions</h3>
+    <ul>
+        {% for question in questions %}
+            <li>{{ question['question_text'] }} (Category: {{ question['category'] }})</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

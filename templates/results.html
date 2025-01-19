@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Mental Health Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
+    <style>
+        /* Basic styling for the body and layout */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        /* Container for main content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Header styling */
+        h1 {
+            text-align: center;
+            color: #005b96;
+        }
+        /* Results section styling */
+        .results {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        /* Stress level text styling */
+        .result-level {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        /* Recommendations section styling */
+        .recommendations {
+            padding: 15px;
+            background-color: #e6f7ff;
+            border-left: 5px solid #005b96;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        /* Heading for recommendations */
+        .recommendations h3 {
+            margin-top: 0;
+        }
+        /* Styling for unordered lists */
+        ul {
+            padding-left: 20px;
+        }
+        /* Footer styling */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #005b96;
+            color: white;
+        }
+        /* Button styling */
+        .button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #2dd833;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin: 10px 5px;
+        }
+        .button:hover {
+            background-color: #075a48;
+        }
+        /* Image styling */
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .print-btn{
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block title %}Your History{% endblock %}
+
+    {% block content %}
+    <button class="print-btn" onclick="window.print()">Print Results</button>
+
+    <div class="container">
+        <h1 class="text-center my-4">Your Mental Health Assessment Results</h1>
+        <p>Total Score: <strong>{{ total_score }}</strong></p>
+        <p>Based on your score, you are : <strong>{{ status }}</strong> vulnerable to stress</p>
+        <p>Your overall stress level is: <strong>{{ stress_level }}</strong></p>
+
+        <div class="row">
+            <!-- Bar Chart -->
+            <div class="col-md-6">
+                <h3 class="text-center">Bar Chart</h3>
+                <img src="data:image/png;base64,{{ bar_chart_url }}" alt="Mental Health Assessment Bar Chart" class="img-fluid">
+            </div>
+        </div>
+         
+        <div class="results">
+            <!-- Displaying the stress level -->
+            <div class="result-level" id="stressLevel"></div>
+            
+            <!-- Recommended activities based on stress level -->
+            <div class="recommendations">
+                <h3>Recommended Activities:</h3>
+                <ul id="activitiesList"></ul>
+            </div>
+            
+            <!-- Recommended yoga poses -->
+            <div class="recommendations">
+                <h3>Recommended Yoga Poses:</h3>
+                <ul id="yogaList"></ul>
+            </div>
+            
+            <!-- Recommended books for stress relief -->
+            <div class="recommendations">
+                <h3>Books to Help:</h3>
+                <ul id="booksList"></ul>
+            </div>
+            
+            <!-- Recommended stress-relieving games -->
+            <div class="recommendations">
+                <h3>Stress-Relieving Games:</h3>
+                <ul id="gamesList"></ul>
+            </div>
+            
+            <!-- Recommended music for relaxation -->
+            <div class="recommendations">
+                <h3>Recommended Music to Relax:</h3>
+                <ul id="musicList"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        // This function simulates loading different recommendations based on the user's stress level.
+        function loadResults(stressLevel) {
+            const stressLevelElement = document.getElementById("stressLevel");
+            const activitiesList = document.getElementById("activitiesList");
+            const yogaList = document.getElementById("yogaList");
+            const musicList = document.getElementById("musicList");
+            const booksList = document.getElementById("booksList");
+            const gamesList = document.getElementById("gamesList");
+    
+            let levelText = "";
+            let activities = [];
+            let yogaPoses = [];
+            let musicTracks = [];
+            let books = [];
+            let games = [];
+            let imageSrc = ""; // Variable to hold image source for the stress level
+    
+            // Define recommendations based on stress levels
+            if (stressLevel == "Low") {
+                levelText = "Your Stress Level: Low";
+                activities = ["Go for a walk", "Try mindful breathing", "Engage in a hobby"];
+                yogaPoses = ["Mountain Pose (Tadasana)", "Child’s Pose (Balasana)", "Bridge Pose (Setu Bandhasana)"];
+                books = ["The Power of Now by Eckhart Tolle", "Mindfulness in Plain English by Bhante Gunaratana"];
+                games = ["Sudoku", "Crossword Puzzles", "Jigsaw Puzzles"];
+                musicTracks = [
+                    { name: "Peaceful Ambient Music", url: "https://open.spotify.com/playlist/7MuGX2icynmq9zuklPCbnX?si=512dedc9de104f30" },
+                    { name: "Nature Sounds", url: "https://open.spotify.com/playlist/2sWwKJKAznIkvjoFRJ3ag3?si=277586a911f84417" },
+                    { name: "Soft Instrumental Tracks", url: "https://open.spotify.com/playlist/1S5FWtaDXYrcpQwz1SVaxR?si=526051d921de4dff" }
+                ];
+                imageSrc = "static/low.jpg"; // Replace with actual image URL
+            } else if (stressLevel === "Moderate") {
+                levelText = "Your Stress Level: Moderate";
+                activities = ["Try journaling", "Practice deep breathing exercises", "Do a 10-minute meditation"];
+                yogaPoses = ["Downward Dog (Adho Mukha Svanasana)", "Tree Pose (Vrikshasana)", "Cobra Pose (Bhujangasana)"];
+                books = ["The Stress Solution by Dr. Rangan Chatterjee", "How to Stop Worrying and Start Living by Dale Carnegie"];
+                games = ["Calm coloring apps", "Memory games", "Bubble Shooter"];
+                musicTracks = [
+                    { name: "Calm Piano Music", url: "https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO?si=2251416b8a2745b1" },
+                    { name: "Lo-Fi Chill Beats", url: "https://open.spotify.com/playlist/37i9dQZF1EIeHADylc7RCT?si=4efdcba26f3d40d8" },
+                    { name: "Soft Classical Music", url: "https://open.spotify.com/album/5tX4GrnMulZfRUN49zxkW1?si=77886f98fcd44b2d" }
+                ];
+                imageSrc = "static/moderate.jpg"; // Replace with actual image URL
+            } else if (stressLevel === "High") {
+                levelText = "Your Stress Level: High";
+                activities = ["Try progressive muscle relaxation", "Practice gratitude journaling", "Engage in guided meditation"];
+                yogaPoses = ["Lotus Pose (Padmasana)", "Cat-Cow Pose (Marjaryasana-Bitilasana)", "Seated Forward Bend (Paschimottanasana)"];
+                books = ["The Happiness Trap by Russ Harris", "The Relaxation and Stress Reduction Workbook by Martha Davis"];
+                games = ["Zen Sand Drawing", "Breathing Apps", "Soothing Puzzle Games"];
+                musicTracks = [
+                    { name: "Guided Meditation Tracks", url: "https://open.spotify.com/playlist/37i9dQZF1DWVS1recTqXhf?si=a91e734834264e09" },
+                    { name: "Relaxing Ocean Sounds", url: "https://open.spotify.com/playlist/37i9dQZF1DWV90ZWj21ygB?si=1396f487bbad4315" },
+                    { name: "Healing Tibetan Bowls", url: "https://open.spotify.com/playlist/37i9dQZF1DX3JNwc30ddaO?si=69370ac34c9b432f" }
+                ];
+                imageSrc = "static/high.jpg"; // Replace with actual image URL
+            } else if (stressLevel === "Severe") {
+                levelText = "Your Stress Level: Severe";
+                activities = ["Seek immediate professional help", "Practice deep breathing and grounding exercises", "Reach out to a support group"];
+                yogaPoses = ["Corpse Pose (Savasana)", "Legs Up the Wall Pose (Viparita Karani)", "Reclining Bound Angle Pose (Supta Baddha Konasana)"];
+                books = ["When Panic Attacks by David D. Burns", "The Body Keeps the Score by Bessel van der Kolk"];
+                games = ["Breathing Apps", "Relaxing Puzzle Games", "Meditation and Mindfulness Apps"];
+                musicTracks = [
+                    { name: "Binaural Beats for Stress Relief", url: "https://open.spotify.com/playlist/37i9dQZF1DX3JNwc30ddaO?si=69370ac34c9b432f" },
+                    { name: "Deep Meditation Music", url: "https://open.spotify.com/playlist/37i9dQZF1DWVS1recTqXhf?si=a91e734834264e09" },
+                    { name: "Soothing Chants", url: "https://open.spotify.com/playlist/1S5FWtaDXYrcpQwz1SVaxR?si=526051d921de4dff" }
+                ];
+                imageSrc = "static/severe.jpg"; // Replace with actual image URL
+            }
+    
+            // Update the HTML elements with the loaded recommendations
+            stressLevelElement.textContent = levelText;
+    
+            // Adding images to the results section
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'image-container';
+            const image = document.createElement('img');
+            image.src = imageSrc;
+            image.alt = "Stress Level Image";
+            image.width = 300; /* Adjust the max-width as needed */
+            imageContainer.appendChild(image);
+            document.querySelector('.results').prepend(imageContainer);
+    
+            // Populate the activity lists
+            activitiesList.innerHTML = activities.map(activity => `<li>${activity}</li>`).join('');
+            yogaList.innerHTML = yogaPoses.map(pose => `<li>${pose}</li>`).join('');
+            booksList.innerHTML = books.map(book => `<li>${book}</li>`).join('');
+            gamesList.innerHTML = games.map(game => `<li>${game}</li>`).join('');
+            
+            // Populate the music list with "Listen Now" buttons
+            musicList.innerHTML = musicTracks.map(track => `
+                <li>
+                    ${track.name} 
+                    <a class="button" href="${track.url}" target="_blank">Listen Now</a>
+                </li>`).join('');
+        }
+
+        // Call the function with the stress level from the server-side template
+        loadResults("{{ stress_level }}"); // This will pass the stress level to the function
+    </script>
+    <!-- Optionally include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

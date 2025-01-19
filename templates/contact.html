@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Mental Health Professional</title>
+    <!-- Adding Bootstrap for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            color: #005b96;
+        }
+        .quote-section {
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-left: 5px solid #005b96;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .quote-section p {
+            font-size: 1.2em;
+            font-style: italic;
+            margin-bottom: 0;
+        }
+        .doctor-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .doctor-card img {
+            border-radius: 80%;
+            width: 100px;
+            height: 100px;
+            margin-right: 40px;
+            margin-left: 40px;
+        }
+        .doctor-info {
+            flex-grow: 1;
+        }
+        .doctor-info h3 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .doctor-info p {
+            margin: 5px 0;
+        }
+        .doctor-info .specialization {
+            font-weight: bold;
+        }
+        .button {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #2dd833;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #075a48;
+        }
+        .emergency-button {
+            padding: 8px 15px;
+            background-color: #ff4c4c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-left: 20px;
+        }
+        .emergency-button:hover {
+            background-color: #d62929;
+        }
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            background-color: #005b96;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block title %}Dashboard{% endblock %}
+    
+    {% block content %}
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>Find a Mental Health Professional</h1>
+            <p>Take a step towards mental wellness by connecting with a certified therapist or counselor.</p>
+        </div>
+
+        <!-- Quotes Section -->
+        <div class="quote-section">
+            <p>"Mental health is not a destination, but a process. It's about how you drive, not where you're going."</p>
+            <p>- Noam Shpancer</p>
+        </div>
+
+        <!-- Doctors/Therapists Cards -->
+        <div class="doctor-card">
+            <img src="https://plus.unsplash.com/premium_photo-1682089874677-3eee554feb19?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGZlbWFsZSUyMGRvY3RvcnxlbnwwfHwwfHx8MA%3D%3D" alt="Dr. John Doe">
+            <div class="doctor-info">
+                <h3>Dr. Amrita Nair</h3>
+                <p class="specialization">Psychiatrist, 15 Years Experience</p>
+                <p>Location: New York City, NY</p>
+                <a href="https://www.example.com" class="button">Book Appointment</a>
+            </div>
+            <a href="tel:+1234567893" class="emergency-button">Emergency Call</a>
+        </div>
+
+        <div class="doctor-card">
+            <img src="https://plus.unsplash.com/premium_photo-1667520580687-a85c9080a9bc?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZG9jdG9yJTIwcG9ydHJhaXR8ZW58MHx8MHx8fDA%3D" alt="Dr. Jane Smith">
+            <div class="doctor-info">
+                <h3>Dr. Jane Smith</h3>
+                <p class="specialization">Clinical Psychologist, 10 Years Experience</p>
+                <p>Location: San Francisco, CA</p>
+                <a href="https://www.example.com" class="button">Book Appointment</a>
+            </div>
+            <a href="tel:+1234567893" class="emergency-button">Emergency Call</a>
+        </div>
+
+        <div class="doctor-card">
+            <img src="https://media.istockphoto.com/id/177373093/photo/indian-male-doctor.jpg?s=612x612&w=0&k=20&c=5FkfKdCYERkAg65cQtdqeO_D0JMv6vrEdPw3mX1Lkfg=" alt="Dr. Alice Johnson">
+            <div class="doctor-info">
+                <h3>Dr. Amit Patel</h3>
+                <p class="specialization">Therapist, 8 Years Experience</p>
+                <p>Location: Boston, MA</p>
+                <a href="https://www.example.com" class="button">Book Appointment</a>
+            </div>
+            <a href="tel:+1234567893" class="emergency-button">Emergency Call</a>
+        </div>
+
+        <div class="doctor-card">
+            <img src="https://headshots-inc.com/wp-content/uploads/2021/01/Professional-Headshot-Examples-31-1.jpg" alt="Dr. Michael Brown">
+            <div class="doctor-info">
+                <h3>Dr. Michael Brown</h3>
+                <p class="specialization">Counselor, 12 Years Experience</p>
+                <p>Location: Los Angeles, CA</p>
+                <a href="https://www.example.com" class="button">Book Appointment</a>
+            </div>
+            <a href="tel:+1234567893" class="emergency-button">Emergency Call</a>
+        </div>
+
+        <!-- Quotes Section -->
+        <div class="quote-section">
+            <p>"You, yourself, as much as anybody in the entire universe, deserve your love and affection."</p>
+            <p>- Buddha</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Mental Health Awareness | Designed with care for your well-being</p>
+    </footer>
+    {% endblock %}
+</body>
+</html>
